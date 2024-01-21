@@ -15,7 +15,7 @@ class pancake_state:
         commas = state_len//2
         for i in range(state_len-commas):
             ps = pancake_state(self.rotate_state(i*2))
-            neighbors += [(ps,1)]
+            neighbors += [(ps, 0)]
         return neighbors
 
 

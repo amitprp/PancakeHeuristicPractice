@@ -25,8 +25,10 @@ def open_not_empty(open_set):
 
 def get_best(open_set):
     vn = heapq.heappop(open_set)
-    statesInOpen.pop(vn.state)
-    return vn
+    while vn[1].state not in statesInOpen:
+        vn = heapq.heappop(open_set)
+    statesInOpen.pop(vn[1].state)
+    return vn[1]
 
 
 def add_to_closed(vn, closed_set):
@@ -40,6 +42,7 @@ def duplicate_in_open(vn, open_set):
     if stateFromDict is not None:
         if vn.g >= stateFromDict:
             return True
+        statesInOpen.pop(stateFromDict)
     return False
 
 #returns False if curr_neighbor state not in closed_set or has a lower g from the node in closed_set
@@ -49,6 +52,7 @@ def duplicate_in_closed(vn, closed_set):
     if stateFromDict is not None:
         if vn.g >= stateFromDict:
             return True
+        statesInOpen.pop(stateFromDict)
     return False
 
 def print_path(path):
@@ -74,6 +78,7 @@ def search(start_state, heuristic, goal_state):
                 path.append(current)
                 current = current.prev
             path.reverse()
+            print_path(path)
             return path
 
         add_to_closed(current, closed_set)
