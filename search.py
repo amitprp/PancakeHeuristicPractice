@@ -1,38 +1,55 @@
 from search_node import search_node
+from heuristics import *
+import heapq
 
-
+statesInOpen = {}
+statesInClosed = {}
 def create_open_set():
-    pass
+    return []
 
 
 def create_closed_set():
-    pass
+    return []
 
 
 def add_to_open(vn, open_set):
-    pass
+    heapq.heappush(open_set, (vn.f, vn))
+    statesInOpen[vn.state] = vn.g
 
 
 def open_not_empty(open_set):
-    pass
+    if len(open_set) != 0:
+        return True
+    return False
 
 
 def get_best(open_set):
-    pass
+    vn = heapq.heappop(open_set)
+    statesInOpen.pop(vn.state)
+    return vn
 
 
 def add_to_closed(vn, closed_set):
-    pass
+    closed_set.append(vn)
+    statesInClosed[vn.state] = vn.g
 
 #returns False if curr_neighbor state not in open_set or has a lower g from the node in open_set
 #remove the node with the higher g from open_set (if exists)
 def duplicate_in_open(vn, open_set):
-    pass
+    stateFromDict = statesInOpen.get(vn.state)
+    if stateFromDict is not None:
+        if vn.g >= stateFromDict:
+            return True
+    return False
 
 #returns False if curr_neighbor state not in closed_set or has a lower g from the node in closed_set
 #remove the node with the higher g from closed_set (if exists)
 def duplicate_in_closed(vn, closed_set):
-    pass
+    stateFromDict = statesInClosed.get(vn.state)
+    if stateFromDict is not None:
+        if vn.g >= stateFromDict:
+            return True
+    return False
 
 def print_path(path):
     for i in range(len(path)-1):
