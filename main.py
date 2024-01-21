@@ -9,7 +9,7 @@ from heuristics import *
 
 if __name__ == '__main__':
      goal_state = "6,5,4,3,2,1"
-     pancake_input = "6,4,2,5,3,1"
+     pancake_input = "5,4,2,3,6,1"
      pancake_state = pancake_state(pancake_input)
      search_result = search(pancake_state, base_heuristic, goal_state)
 

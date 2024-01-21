@@ -38,11 +38,12 @@ def add_to_closed(vn, closed_set):
 #returns False if curr_neighbor state not in open_set or has a lower g from the node in open_set
 #remove the node with the higher g from open_set (if exists)
 def duplicate_in_open(vn, open_set):
+
     stateFromDict = statesInOpen.get(vn.state)
     if stateFromDict is not None:
         if vn.g >= stateFromDict:
             return True
-        statesInOpen.pop(stateFromDict)
+        statesInOpen.pop(vn.state)
     return False
 
 #returns False if curr_neighbor state not in closed_set or has a lower g from the node in closed_set
@@ -52,12 +53,12 @@ def duplicate_in_closed(vn, closed_set):
     if stateFromDict is not None:
         if vn.g >= stateFromDict:
             return True
-        statesInOpen.pop(stateFromDict)
+        statesInOpen.pop(vn.state)
     return False
 
 def print_path(path):
     for i in range(len(path)-1):
-        print(f"[{path[i].state.get_state_str()}]", end=", ")
+        print(f"[{path[i].state.get_state_str()}] [{path[i].g}] [{path[i].h}]", end=", ")
     print(path[-1].state.state_str)
 
 

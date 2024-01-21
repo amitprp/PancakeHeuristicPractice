@@ -10,12 +10,15 @@ class pancake_state:
 
     #returns an array of tuples of neighbor states and the cost to reach them: [(pancake_state1, cost1), (pancake _state2, cost2)...]
     def get_neighbors(self):
+        state_list = [int(num) for num in self.state_str.split(',')]
+        temp_sum = sum(state_list)
         neighbors = []
         state_len = len(self.state_str)-1
         commas = state_len//2
         for i in range(state_len-commas):
             ps = pancake_state(self.rotate_state(i*2))
-            neighbors += [(ps, 0)]
+            neighbors += [(ps, temp_sum)]
+            temp_sum -= int(self.state_str[i*2])
         return neighbors
 
 
@@ -33,7 +36,10 @@ class pancake_state:
 
     def rotate_state(self, index1):
         to_rotate = self.state_str;
-        rotated_part =  to_rotate[index1:]
-        return  to_rotate[:index1] + rotated_part[::-1]
+        rotated_part = to_rotate[index1:]
+        return to_rotate[:index1] + rotated_part[::-1]
+
+    def __repr__(self):
+        return self.state_str
 
 
