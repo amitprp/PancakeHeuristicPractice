@@ -58,7 +58,7 @@ def duplicate_in_closed(vn, closed_set):
 
 def print_path(path):
     for i in range(len(path)-1):
-        print(f"[{path[i].state.get_state_str()}] [{path[i].g}] [{path[i].h}]", end=", ")
+        print(f"[{path[i].state.get_state_str()}]", end=", ")
     print(path[-1].state.state_str)
 
 
