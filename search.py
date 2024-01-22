@@ -5,11 +5,16 @@ import heapq
 statesInOpen = {}
 statesInClosed = {}
 def create_open_set():
+    statesInOpen.clear()
     return []
+
+
 
 
 def create_closed_set():
+    statesInClosed.clear()
     return []
+
 
 
 def add_to_open(vn, open_set):
@@ -24,9 +29,11 @@ def open_not_empty(open_set):
 
 
 def get_best(open_set):
-    vn = heapq.heappop(open_set)
-    while vn[1].state not in statesInOpen:
+    if open_set:
         vn = heapq.heappop(open_set)
+    while vn[1].state not in statesInOpen:
+        if open_set:
+            vn = heapq.heappop(open_set)
     statesInOpen.pop(vn[1].state)
     return vn[1]
 
@@ -53,7 +60,7 @@ def duplicate_in_closed(vn, closed_set):
     if stateFromDict is not None:
         if vn.g >= stateFromDict:
             return True
-        statesInOpen.pop(vn.state)
+        statesInClosed.pop(vn.state)
     return False
 
 def print_path(path):
