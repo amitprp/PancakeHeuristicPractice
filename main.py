@@ -13,8 +13,8 @@ if __name__ == '__main__':
      # pancake_state = pancake_state(pancake_input)
      # search_result = search(pancake_state, base_heuristic, goal_state)
      for i in range(100):
-         numbers = [3, 1, 4, 2]
-         goal_state = "4,3,2,1"
+         # numbers = [3, 1, 4, 2]
+         # goal_state = "4,3,2,1"
          numbers = list(range(9, 0, -1))
          goal_state = ','.join(map(str, numbers))
          random.shuffle(numbers)
@@ -23,7 +23,10 @@ if __name__ == '__main__':
          start_state = pancake_state(start_string)
          start_time = time.time()
          search_result = search(start_state, base_heuristic, goal_state)
-         print(search_result)
+         end_time = time.time()
+         print(end_time - start_time)
+         start_time = time.time()
+         search_result = search(start_state, advanced_heuristic, goal_state)
          end_time = time.time()
          print(end_time - start_time)
 
